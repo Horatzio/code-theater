@@ -1,0 +1,13 @@
+{
+    "name": "react-code-theater",
+    "private": true,
+    "workspaces": {
+        "packages": [
+            "packages/*",
+            "sites/*"
+        ]
+    },
+    "devDependencies": {
+        "eslint-prettier": "^0.0.0-empty"
+    }
+}
