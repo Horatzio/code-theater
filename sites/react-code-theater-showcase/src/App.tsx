@@ -1,11 +1,17 @@
+import { useEffect } from 'react'
 import './App.css'
-import { CodeShowcase } from 'react-code-theater';
+import CodeTheater from './components/CodeTheater'
+import { createEditor } from 'C:/Projects/code-theater-test/dist/editor.js'
 
 function App() {
+  useEffect(() => {
+    createEditor();
+  }, [])
+
   return (
-    <>
-      <CodeShowcase></CodeShowcase>
-    </>
+    <div style={{ width: "200px" }}>
+      <CodeTheater></CodeTheater>
+    </div>
   )
 }
 
