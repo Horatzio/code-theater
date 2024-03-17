@@ -1,0 +1,1 @@
+export { CodeTheater } from "./components/CodeTheater";

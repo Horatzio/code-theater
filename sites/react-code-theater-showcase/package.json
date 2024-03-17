@@ -17,6 +17,7 @@
     "@codemirror/state": "^6.4.1",
     "@codemirror/view": "^6.26.0",
     "react": "^18.2.0",
+    "react-code-theater-rollup": "file:../../packages/react-code-theater-rollup",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

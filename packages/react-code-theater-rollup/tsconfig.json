@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "rootDir": ".",
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "outDir": "dist",
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
+  },
+  "include": [
+    "src",
+    "rollup.config.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "types"
+  ],
+}
