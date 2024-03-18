@@ -1,28 +1,37 @@
-import { useEffect, useRef, useState } from "react"
-import { createEditor } from "./Editor"
-import { EditorView } from "@codemirror/view"
+import { useEffect, useRef } from "react"
+import { CodeEditor, createEditor } from "./editor/CodeEditor"
+import "./CodeTheater.scss"
+import { EditorLanguages } from "./editor/EditorLanguages"
 
 interface CodeTheaterProps {
-    count?: number
+    language?: EditorLanguages
 }
 
-export const CodeTheater = (props: CodeTheaterProps) => {
-    const [count, setCount] = useState(0)
-
-    const ref = useRef<HTMLDivElement>();
-    const editorViewRef = useRef<EditorView>(null);
+export const CodeTheater = ({ language = EditorLanguages.javascript }: CodeTheaterProps) => {
+    const editorParent = useRef<HTMLDivElement>();
+    const editorViewRef = useRef<CodeEditor>(null);
 
     useEffect(() => {
-        if (ref.current && !editorViewRef.current) {
-            editorViewRef.current = createEditor();
+        if (editorParent.current && !editorViewRef.current) {
+            editorViewRef.current = createEditor(editorParent.current);
+        }
+
+        return () => {
+            if (editorViewRef.current) {
+                editorViewRef.current.dispose();
+                editorViewRef.current = null;
+            }
         }
     }, []);
 
-    return <>
+    useEffect(() => {
+        if (editorViewRef.current) {
+            editorViewRef.current.changeLanguage(language);
+        }
+    }, [language]);
+
+    return <div className="code-theater-container">
         HELLO WORLD
-        <button onClick={() => setCount((c) => c + 1)}>
-            {count}
-        </button>
-        <div id="code-editor" ref={ref}></div>
-    </>
+        <div className="code-editor-container" ref={editorParent}></div>
+    </div>
 }

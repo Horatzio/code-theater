@@ -6,6 +6,7 @@ import terser from '@rollup/plugin-terser'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { RollupOptions } from 'rollup';
 import { dts } from "rollup-plugin-dts";
+import scss from 'rollup-plugin-scss';
 
 const buildConfig: RollupOptions = {
     input: 'src/index.ts',
@@ -15,7 +16,6 @@ const buildConfig: RollupOptions = {
             format: 'esm',
             exports: 'named',
             sourcemap: true,
-            sourcemapBaseUrl: '.',
         },
     ],
     plugins: [
@@ -24,18 +24,23 @@ const buildConfig: RollupOptions = {
         }),
         json(),
         peerDepsExternal(),
-
         nodeResolve(),
         commonjs(),
-
         terser(),
-    ]
+        scss({
+            fileName: 'index.css',
+            sourceMap: true,
+            include: 'src/**/*.{css,scss}',
+            watch: 'src',
+        })
+    ],
 };
 
 const dtsConfig: RollupOptions = {
-    input: "./dist/cjs/types/src/index.d.ts",
+    input: "./dist/cjs/types/index.d.ts",
     output: [{ file: "dist/index.d.ts", format: "es" }],
     plugins: [dts()],
+    external: [/\.s?css$/]
 };
 
 export default [buildConfig, dtsConfig];
